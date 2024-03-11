@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 module "asg" {
-  source             = "../../cluster/asg-rolling-deploy"
+  source             = "../../../modules/cluster/asg-rolling-deploy"
   cluster_name       = "one-instance-example"
   ami                = data.aws_ami.ubuntu.id
   instance_type      = "t2.micro"
@@ -45,7 +45,7 @@ data "aws_vpc" "default" {
 }
 
 module "one_instance_security_group" {
-  source       = "../../networking/security-group/allow-inbound"
+  source       = "../../../modules/networking/security-group/allow-inbound"
   name         = "one-instance-security-group"
   inbound_port = 22
 }
