@@ -13,15 +13,14 @@ provider "aws" {
 }
 
 module "asg" {
-  source             = "../../../modules/cluster/asg-rolling-deploy"
-  cluster_name       = "one-instance-example"
-  ami                = data.aws_ami.ubuntu.id
-  instance_type      = "t2.micro"
-  min_size           = 1
-  max_size           = 1
-  enable_scheduling  = false
-  subnet_ids         = data.aws_subnets.default.ids
-  security_group_ids = [module.one_instance_security_group.id]
+  source            = "../../../modules/cluster/asg-rolling-deploy"
+  name              = "one-instance-example"
+  ami               = data.aws_ami.ubuntu.id
+  instance_type     = "t2.micro"
+  min_size          = 1
+  max_size          = 1
+  enable_scheduling = false
+  subnet_ids        = data.aws_subnets.default.ids
 }
 
 data "aws_ami" "ubuntu" {
@@ -42,10 +41,4 @@ data "aws_subnets" "default" {
 
 data "aws_vpc" "default" {
   default = true
-}
-
-module "one_instance_security_group" {
-  source       = "../../../modules/networking/security-group/allow-inbound"
-  name         = "one-instance-security-group"
-  inbound_port = 22
 }

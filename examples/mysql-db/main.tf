@@ -13,15 +13,8 @@ provider "aws" {
 }
 
 module "mysql_example" {
-  source                = "../../../modules/data-stores/mysql"
-  db_username           = var.db_username
-  db_password           = var.db_password
-  db_security_group_ids = [module.db_security_group_example.id]
-}
-
-module "db_security_group_example" {
-  source       = "../../../modules/networking/security-group/allow-inbound"
-  name         = "db-security-group"
-  inbound_port = 5000
+  source      = "../../../modules/data-stores/mysql"
+  db_username = var.db_username
+  db_password = var.db_password
 }
 
