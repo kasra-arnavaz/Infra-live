@@ -12,11 +12,10 @@ provider "aws" {
   region = "us-east-2"
 }
 
-module "ami-docker-example" {
-  source        = "../../../modules/services/docker-app"
-  environment   = "example3"
-  min_size      = 1
-  max_size      = 1
-  instance_type = "t2.micro"
-  server_port   = 5000
+module "mysql" {
+  source      = "../../../../modules/data-stores/mysql"
+  db_username = var.db_username
+  db_password = var.db_password
+  env_name    = "dev"
 }
+

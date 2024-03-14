@@ -12,9 +12,11 @@ provider "aws" {
   region = "us-east-2"
 }
 
-module "mysql_example" {
-  source      = "../../../modules/data-stores/mysql"
-  db_username = var.db_username
-  db_password = var.db_password
+module "docker-app" {
+  source        = "../../../../modules/services/docker-app"
+  env_name      = "dev"
+  min_size      = 1
+  max_size      = 1
+  instance_type = "t2.micro"
+  server_port   = 5000
 }
-

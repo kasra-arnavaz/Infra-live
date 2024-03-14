@@ -12,9 +12,9 @@ provider "aws" {
   region = "us-east-2"
 }
 
-module "hello-world-app-example" {
-  source        = "../../../modules/services/hello-world-app"
-  environment   = "example"
+module "hello-world-app" {
+  source        = "../../../../modules/services/hello-world-app"
+  env_name      = "dev"
   min_size      = 1
   max_size      = 1
   ami           = data.aws_ami.ubuntu.id
