@@ -17,5 +17,17 @@ module "mysql" {
   db_username = var.db_username
   db_password = var.db_password
   env_name    = "dev"
+  name        = "library"
+  table       = "books"
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "kasraz-state"
+    key            = "dev/data-stores/mysql/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "state-lock"
+    encrypt        = true
+  }
 }
 
