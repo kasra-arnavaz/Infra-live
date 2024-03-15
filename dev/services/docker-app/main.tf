@@ -17,6 +17,7 @@ module "docker-app" {
   env_name               = "dev"
   min_size               = 1
   max_size               = 1
+  enable_scheduling      = false
   instance_type          = "t2.micro"
   server_port            = 5000
   db_remote_state_bucket = "kasraz-state"
