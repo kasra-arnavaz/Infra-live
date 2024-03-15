@@ -13,10 +13,22 @@ provider "aws" {
 }
 
 module "docker-app" {
-  source        = "../../../../modules/services/docker-app"
-  env_name      = "dev"
-  min_size      = 1
-  max_size      = 1
-  instance_type = "t2.micro"
-  server_port   = 5000
+  source                 = "../../../../modules/services/docker-app"
+  env_name               = "dev"
+  min_size               = 1
+  max_size               = 1
+  instance_type          = "t2.micro"
+  server_port            = 5000
+  db_remote_state_bucket = "kasraz-state"
+  db_remote_state_key    = "dev/data-stores/mysql/terraform.tfstate"
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "kasraz-state"
+    key            = "dev/services/docker-app/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "state-lock"
+    encrypt        = true
+  }
 }
