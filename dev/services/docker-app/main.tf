@@ -23,13 +23,3 @@ module "docker-app" {
   db_remote_state_bucket = "kasraz-state"
   db_remote_state_key    = "dev/data-stores/mysql/terraform.tfstate"
 }
-
-terraform {
-  backend "s3" {
-    bucket         = "kasraz-state"
-    key            = "dev/services/docker-app/terraform.tfstate"
-    region         = "us-east-2"
-    dynamodb_table = "state-lock"
-    encrypt        = true
-  }
-}
