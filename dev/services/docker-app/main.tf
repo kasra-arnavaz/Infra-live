@@ -13,13 +13,21 @@ provider "aws" {
 }
 
 module "docker-app" {
-  source                 = "../../../../modules/services/docker-app"
-  env_name               = "dev"
-  min_size               = 1
-  max_size               = 1
-  enable_scheduling      = false
-  instance_type          = "t2.micro"
-  server_port            = 5000
-  db_remote_state_bucket = "kasraz-state"
-  db_remote_state_key    = "dev/data-stores/mysql/terraform.tfstate"
+  source            = "../../../../modules/services/docker-app"
+  env_name          = "dev"
+  min_size          = 1
+  max_size          = 1
+  enable_scheduling = false
+  instance_type     = "t2.micro"
+  server_port       = 5000
+  db_config         = module.mysql
+}
+
+module "mysql" {
+  source      = "../../../../modules/data-stores/mysql"
+  db_username = var.db_username
+  db_password = var.db_password
+  env_name    = "docker-db"
+  name        = "library"
+  table       = "books"
 }
