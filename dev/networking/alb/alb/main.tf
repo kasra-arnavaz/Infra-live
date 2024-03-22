@@ -15,8 +15,10 @@ provider "aws" {
 
 module "alb" {
   source     = "../../../../../modules/networking/alb"
-  env_name   = var.alb_name
+  name       = var.name
+  env_name   = "dev"
   subnet_ids = data.aws_subnets.default.ids
+
 }
 
 data "aws_vpc" "default" {

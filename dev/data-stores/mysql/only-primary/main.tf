@@ -17,7 +17,7 @@ module "mysql" {
   db_username = var.db_username
   db_password = var.db_password
   env_name    = "dev"
-  name        = "library"
+  db_name     = "library"
   table       = "books"
 }
 

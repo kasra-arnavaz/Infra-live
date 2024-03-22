@@ -14,7 +14,10 @@ provider "aws" {
 
 module "hello-world-app" {
   source        = "../../../../modules/services/hello-world-app"
-  env_name      = var.env_name
+  name          = var.name
+  cluster_name  = var.cluster_name
+  alb_name      = var.alb_name
+  env_name      = "dev"
   min_size      = 1
   max_size      = 1
   ami           = data.aws_ami.ubuntu.id

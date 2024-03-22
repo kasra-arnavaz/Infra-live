@@ -20,9 +20,10 @@ provider "aws" {
 
 module "mysql_primary" {
   source                  = "../../../../../modules/data-stores/mysql"
-  env_name                = local.name
-  name                    = "library"
+  name                    = "primary-db"
+  env_name                = "dev"
   table                   = "books"
+  db_name                 = "library"
   db_username             = var.db_username
   db_password             = var.db_password
   backup_retention_period = 1
@@ -33,14 +34,11 @@ module "mysql_primary" {
 
 module "mysql_replica" {
   source              = "../../../../../modules/data-stores/mysql"
-  env_name            = local.name
+  name                = "replica-db"
+  env_name            = "dev"
   replicate_source_db = module.mysql_primary.arn
   providers = {
     aws = aws.replica
   }
-}
-
-locals {
-  name = "multi-region-db"
 }
 

@@ -25,9 +25,10 @@ module "docker-app" {
 
 module "mysql" {
   source      = "../../../../modules/data-stores/mysql"
+  name        = "docker-db"
+  env_name    = "dev"
   db_username = var.db_username
   db_password = var.db_password
-  env_name    = "docker-db"
-  name        = "library"
+  db_name     = "library"
   table       = "books"
 }
