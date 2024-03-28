@@ -14,6 +14,7 @@ provider "aws" {
 
 module "mysql" {
   source      = "../../../../../modules/data-stores/mysql"
+  name        = var.name
   db_username = var.db_username
   db_password = var.db_password
   env_name    = "dev"

@@ -14,3 +14,14 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "name" {
+  description = "The name of the module"
+  type        = string
+  default     = "my-db"
+}
