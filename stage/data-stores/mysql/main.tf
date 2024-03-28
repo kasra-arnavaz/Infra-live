@@ -1,9 +1,12 @@
 terraform {
+  required_version = ">= 1.0.0, < 2.0.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+  }
+  backend "s3" {
   }
 }
 
@@ -12,20 +15,11 @@ provider "aws" {
 }
 
 module "mysql" {
-  source      = "github.com/kasra-arnavaz/NN-modules//data-stores/mysql?ref=v0.8.0"
+  source      = "github.com/kasra-arnavaz/NN-modules//data-stores/mysql?ref=v0.9.4"
+  name        = var.name
   db_username = var.db_username
   db_password = var.db_password
   env_name    = "stage"
-  name        = "library"
+  db_name     = "library"
   table       = "books"
-}
-
-terraform {
-  backend "s3" {
-    bucket         = "kasraz-state"
-    key            = "stage/data-stores/mysql/terraform.tfstate"
-    region         = "us-east-2"
-    dynamodb_table = "state-lock"
-    encrypt        = true
-  }
 }
