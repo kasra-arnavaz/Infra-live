@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 module "mysql" {
-  source      = "github.com/kasra-arnavaz/NN-modules//data-stores/mysql?ref=v0.9.4"
+  source      = "github.com/kasra-arnavaz/NN-modules//data-stores/mysql"
   name        = var.name
   db_username = var.db_username
   db_password = var.db_password
