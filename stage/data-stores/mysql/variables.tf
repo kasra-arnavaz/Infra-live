@@ -14,3 +14,8 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "name" {
+  description = "The name of the module"
+  type        = string
+}
