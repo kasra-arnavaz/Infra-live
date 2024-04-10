@@ -13,18 +13,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Autheticate to AWS using OICD
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::654654356600:role/github-actions-oidc-example20240410145906668200000001
           aws-region: us-east-2
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.7.5
           terraform_wrapper: false
 
-      - name: Terraform Init and Apply
+      - name: Terraform version
         run: |
-          terraform init
-          terraform apply -auto-approve
+          terraform version
