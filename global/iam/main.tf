@@ -36,17 +36,13 @@ data "aws_iam_policy_document" "assume_role_policy" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
-
     principals {
       identifiers = [aws_iam_openid_connect_provider.github_actions.arn]
       type        = "Federated"
     }
-
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      # The repos and branches defined in var.allowed_repos_branches
-      # will be able to assume this IAM role
       values = [
         for a in var.allowed_repos_branches :
         "repo:${a["org"]}/${a["repo"]}:ref:refs/heads/${a["branch"]}"
@@ -58,7 +54,21 @@ data "aws_iam_policy_document" "assume_role_policy" {
 # Attach the EC2 admin permissions to the IAM role
 resource "aws_iam_role_policy" "example" {
   role   = aws_iam_role.instance.id
-  policy = data.aws_iam_policy_document.ec2_admin_permissions.json
+  policy = data.aws_iam_policy_document.ec2_and_s3_admin_permissions.json
+}
+
+# Create an IAM policy that grants EC2 and S3 admin permissions
+data "aws_iam_policy_document" "ec2_and_s3_admin_permissions" {
+  statement {
+    effect    = "Allow"
+    actions   = ["ec2:*"]
+    resources = ["*"]
+  }
+  statement {
+    effect    = "Allow"
+    actions   = ["s3:*"]
+    resources = ["*"]
+  }
 }
 
 # Create an IAM policy that grants EC2 admin permissions
