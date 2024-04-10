@@ -1,11 +1,8 @@
-name: Terraform Apply
+name: Continuous Integration
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_dispatch:
 permissions:
   id-token: write
-  contents: read
 jobs:
   TerraformApply:
     runs-on: ubuntu-latest
