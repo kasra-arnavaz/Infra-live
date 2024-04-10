@@ -61,22 +61,13 @@ resource "aws_iam_role_policy" "example" {
 data "aws_iam_policy_document" "ec2_s3_rds_elb_admin_permissions" {
   statement {
     effect    = "Allow"
-    actions   = ["ec2:*"]
-    resources = ["*"]
-  }
-  statement {
-    effect    = "Allow"
-    actions   = ["s3:*"]
-    resources = ["*"]
-  }
-  statement {
-    effect    = "Allow"
-    actions   = ["rds:*"]
-    resources = ["*"]
-  }
-  statement {
-    effect    = "Allow"
-    actions   = ["elasticloadbalancing:*"] 
+    actions   = [
+      "ec2:*",
+      "s3:*",
+      "rds:*",
+      "elasticloadbalancing:*",
+      "autoscaling:*",
+    ]
     resources = ["*"]
   }
 }
