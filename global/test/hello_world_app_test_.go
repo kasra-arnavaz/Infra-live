@@ -2,24 +2,25 @@ package test
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 	"time"
-	"strings"
-	"github.com/gruntwork-io/terratest/modules/terraform"
+
 	http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/random"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
 func TestHelloWorldAppExample(t *testing.T) {
 	t.Parallel()
 	opts := &terraform.Options{
-		TerraformDir: "../live/dev/services/hello-world-app",
+		TerraformDir: "../../dev/services/hello-world-app",
 		Vars: map[string]interface{}{
-			"name": fmt.Sprintf("test-%s", random.UniqueId()),
+			"name":         fmt.Sprintf("test-%s", random.UniqueId()),
 			"cluster_name": fmt.Sprintf("test-cluster-%s", random.UniqueId()),
-			"alb_name": fmt.Sprintf("test-alb-%s", random.UniqueId()),
+			"alb_name":     fmt.Sprintf("test-alb-%s", random.UniqueId()),
 		},
-		MaxRetries: 3,
+		MaxRetries:         3,
 		TimeBetweenRetries: 5 * time.Second,
 		RetryableTerraformErrors: map[string]string{
 			"RequestError: send request failed": "Throttling issue?",

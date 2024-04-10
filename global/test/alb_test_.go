@@ -1,18 +1,19 @@
 package test
 
 import (
-	"github.com/gruntwork-io/terratest/modules/terraform"
+	"fmt"
+	"testing"
+	"time"
+
 	http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/random"
-	"testing"
-	"fmt"
-	"time"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestAlbExample(t *testing.T){
+func TestAlbExample(t *testing.T) {
 	t.Parallel()
 	opts := &terraform.Options{
-		TerraformDir: "../live/dev/networking/alb/alb",
+		TerraformDir: "../../dev/networking/alb/alb",
 		Vars: map[string]interface{}{
 			"name": fmt.Sprintf("test-%s", random.UniqueId()),
 		},

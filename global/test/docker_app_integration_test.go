@@ -11,8 +11,8 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-const dbDir = "../live/stage/data-stores/mysql"
-const appDir = "../live/stage/services/docker-app"
+const dbDir = "../../stage/data-stores/mysql"
+const appDir = "../../stage/services/docker-app"
 const bucketForTesting = "kasraz-test-state"
 const bucketRegionForTesting = "us-east-2"
 
