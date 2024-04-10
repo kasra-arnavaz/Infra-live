@@ -31,6 +31,6 @@ jobs:
 
       - name: Run all tests
         run: |
+          cd global/test
           go mod tidy
           go test -m timeout 30m
-        working-directory: global/test
