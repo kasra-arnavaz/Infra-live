@@ -15,7 +15,7 @@ jobs:
       - name: Autheticate to AWS using OICD
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam:123456789012:role/example-role
+          role-to-assume: arn:aws:iam::654654356600:role/github-actions-oidc-example20240410145906668200000001
           aws-region: us-east-2
 
       - name: Setup Terraform
